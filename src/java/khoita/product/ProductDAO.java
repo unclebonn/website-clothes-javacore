@@ -150,7 +150,7 @@ public class ProductDAO implements Serializable {
                     String productID = rs.getString("productID");
                     String productName = rs.getString("productName");
                     String productDescription = rs.getString("productDescription");
-                    float productPrice = rs.getFloat("productPrice");
+                    float productPrice = (float) (Math.round(rs.getFloat("productPrice")*10.0)/10.0);
                     int productQuantity = rs.getInt("productQuantity");
                     String cartID = rs.getString("cartID");
                     String productProcess = rs.getString("process");

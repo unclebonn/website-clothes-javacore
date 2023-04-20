@@ -65,6 +65,7 @@
             %>
         </tbody>
     </table>
+        <a href="shopping.jsp">Back to shopping</a>
 
     <%
         }
