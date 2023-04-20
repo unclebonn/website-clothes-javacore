@@ -60,6 +60,9 @@
             %>
         </tbody>
     </table>
+        <button>
+            <a href="DispatchController?btAction=viewcart">View cart</a>
+        </button>
     <%
         }
     %>

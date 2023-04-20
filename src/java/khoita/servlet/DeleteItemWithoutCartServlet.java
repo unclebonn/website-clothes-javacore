@@ -7,23 +7,20 @@ package khoita.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import khoita.registration.RegistrationDAO;
+import javax.servlet.http.HttpSession;
+import khoita.cartsession.CartDTO;
 
 /**
  *
  * @author Fstore
  */
-@WebServlet(name = "DeleteServlet", urlPatterns = {"/DeleteServlet"})
-public class DeleteServlet extends HttpServlet {
+@WebServlet(name = "DeleteItemServlet", urlPatterns = {"/DeleteItemServlet"})
+public class DeleteItemWithoutCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,24 +33,23 @@ public class DeleteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "";
         try {
-            String account = request.getParameter("accountID");
-            String lastSearchValue = request.getParameter("txtSearchValue");
-            RegistrationDAO dao = new RegistrationDAO();
-            if(dao.deleteUser(account)){
-               url = "DispatchController"
-                       + "?txtSearch=" + lastSearchValue
-                       + "&btAction=search";
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                CartDTO dto = (CartDTO) session.getAttribute("CART");
+                if (dto != null) {
+                    String[] items = request.getParameterValues("chkItem");
+                    for (String item : items) {
+                        dto.deleteItemToCart(item);
+                    }
+                    session.setAttribute("CART", dto);
+                }
             }
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
-        } catch (NamingException ex) {
-            System.out.println(ex);
+        } catch (Exception e) {
+
         } finally {
+            String url = "DispatchController?btAction=View cart";
             response.sendRedirect(url);
         }
     }

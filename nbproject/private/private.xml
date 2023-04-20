@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/web/shopping.jsp</file>
-            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/src/java/khoita/product/ProductDAO.java</file>
-            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/src/java/khoita/utils/testingConnect.java</file>
-            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/src/java/khoita/servlet/AddToCartServlet.java</file>
-            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/web/search.jsp</file>
-            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/src/java/khoita/product/ProductDTO.java</file>
+            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/src/java/khoita/servlet/DeleteItemServlet.java</file>
+            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/web/register.jsp</file>
+            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/web/viewcartwithoutaccount.jsp</file>
+            <file>file:/C:/Users/Fstore/Documents/NetBeansProjects/PRJBLOCK3_Ws2/src/java/khoita/servlet/AddToCartWithoutAccountServlet.java</file>
         </group>
     </open-files>
 </project-private>

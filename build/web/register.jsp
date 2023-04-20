@@ -25,8 +25,8 @@
             <!--This error catch for password-->
             <p style="color:red">${requestScope.RegisterErros.passwordLengthError}</p>
             <p style="color:red">${requestScope.RegisterErros.confirmPassword}</p>
-            <label>Password</label>(6-25 characters)</br>
-            <input type="password" name="password" value="" /></br>
+            <label>Password</label></br>
+            <input type="password" name="password" value="" />(6-25 characters) </br>
             <label>Confirm Password</label></br>
             <input type="password" name="confirmPpassword" value="" />
             <p style="color:red">${requestScope.RegisterErros.fullnameLengthError}</p>

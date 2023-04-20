@@ -6,20 +6,25 @@
 package khoita.servlet;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import khoita.cartsession.CartDTO;
 
 /**
  *
  * @author Fstore
  */
-@WebServlet(name = "DispatchController", urlPatterns = {"/DispatchController"})
-public class DispatchController extends HttpServlet {
+@WebServlet(name = "AddToCartWithoutAccountServlet", urlPatterns = {"/AddToCartWithoutAccountServlet"})
+public class AddToCartWithoutAccountServlet extends HttpServlet {
+
+    private final String SHOPPING_PAGE = "shoppingwithoutaccount.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,42 +37,22 @@ public class DispatchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "index.html";
-        String btAction = request.getParameter("btAction");
 
+        String book = request.getParameter("cboBook");
         try {
-            if (btAction == null) {
-
-            } else if (btAction.equals("login")) {
-                url = "LoginServlet";
-            } else if (btAction.equals("register")) {
-                url = "RegisterServlet";
-            } else if (btAction.equals("search")) {
-                url = "SearchLastNameServlet";
-            } else if (btAction.equals("delete")) {
-                url = "DeleteAccountServlet";
-            } else if (btAction.equals("update")) {
-                url = "UpdateServlet";
-            } else if (btAction.equals("logout")) {
-                url = "LogoutServlet";
-            } else if (btAction.equals("addtocart")) {
-                url = "AddToCartServlet";
-            } else if (btAction.equals("viewcart")) {
-                url = "viewcart.jsp";
-            } else if (btAction.equals("Add to your cart")) {
-                url = "AddToCartWithoutAccountServlet";
-            } else if (btAction.equals("View cart")) {
-                url = "viewcartwithoutaccount.jsp";
-            } else if (btAction.equals("deleteItem")) {
-                url = "DeleteItemWithoutCartServlet";
+            HttpSession session = request.getSession();
+            CartDTO cart = (CartDTO) session.getAttribute("CART");
+            if (cart == null) {
+                cart = new CartDTO();
             }
+            cart.addItemToCart(book);
+            session.setAttribute("CART", cart);
+
         } catch (Exception e) {
             System.out.println(e);
+        } finally {
+            response.sendRedirect(SHOPPING_PAGE);
         }
-
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
