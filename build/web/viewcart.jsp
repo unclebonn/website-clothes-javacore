@@ -32,20 +32,32 @@
                     <th>ProductPrice</th>
                     <th>ProductQuantity</th>
                     <th>Process</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <%
                     for (DetailCartDTO productInfo : product) {
                 %>
+                <!--use productId and cardID from user to remove item in their cart-->
             <form action="DispatchController">
                 <tr>
                     <td><%= productInfo.getProductID()%></td>
-                    <td><%= productInfo.getProductName()%></td>
-                    <td><%= productInfo.getProductDescription()%></td>
-                    <td><%= productInfo.getProductPrice()%></td>
-                    <td><%= productInfo.getProductQuantity()%></td>
-                    <td><%= productInfo.getProcess()%></td>
+                <input type="hidden" name="txtProductID" value="<%= productInfo.getProductID()%>" />
+                <td><%= productInfo.getProductName()%></td>
+                <td><%= productInfo.getProductDescription()%></td>
+                <td><%= productInfo.getProductPrice()%></td>
+                <td>
+                    <input style="width: 95%;text-align: center" type="number" name="txtProductQuantity" value="<%= productInfo.getProductQuantity()%>" min="1" max="50" />
+                </td>
+                <td><%= productInfo.getProcess()%></td>
+                <input type="hidden" name="txtCardID" value="<%= productInfo.getCardID()%>" />
+
+                <td>
+                    <input type="submit" value="Update Item" name="btAction" />
+                    <a href="DispatchController?btAction=Delete Item&txtProductID=<%= productInfo.getProductID()%>
+                       &txtCardID=<%= productInfo.getCardID()%>">DeleteItem</a>
+                </td>
                 </tr>
             </form>
             <%
@@ -53,7 +65,7 @@
             %>
         </tbody>
     </table>
-    
+
     <%
         }
     %>
