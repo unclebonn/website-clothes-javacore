@@ -5,11 +5,13 @@
  */
 package khoita.detailcart;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Fstore
  */
-public class DetailCartDTO {
+public class DetailCartDTO  implements Serializable{
     private String productID;
     private String productName;
     private String productDescription;

@@ -19,7 +19,7 @@ import khoita.cartsession.CartDTO;
  *
  * @author Fstore
  */
-@WebServlet(name = "DeleteItemServlet", urlPatterns = {"/DeleteItemServlet"})
+@WebServlet(name = "DeleteItemWithoutCartServlet", urlPatterns = {"/DeleteItemWithoutCartServlet"})
 public class DeleteItemWithoutCartServlet extends HttpServlet {
 
     /**
