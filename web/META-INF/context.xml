@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/PRJBLOCK3_Ws2">
-    <Resource name ="HAHA" auth ="Container" type="javax.sql.DataSource"
-     driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
-     url = "jdbc:sqlserver://localhost:1433;databaseName=PRJBLOCK3;instanceName=ANHKHOI"  
-     username="sa" password ="12345"
-    />
+<Context path="/WS02_TranAnhKhoi_FA223W">
+  <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" name="HAHA" password="12345" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;databaseName=PRJBLOCK3;instanceName=ANHKHOI" username="sa"/>
 </Context>
-

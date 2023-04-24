@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="PRJBLOCK3_Ws2" default="default" basedir=".">
-    <description>Builds, tests, and runs the project PRJBLOCK3_Ws2.</description>
+<project name="WS02_TranAnhKhoi_FA223W" default="default" basedir=".">
+    <description>Builds, tests, and runs the project WS02_TranAnhKhoi_FA223W.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

@@ -6,20 +6,29 @@
 package khoita.servlet;
 
 import java.io.IOException;
-
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import khoita.detailcart.DetailCartDTO;
+import khoita.product.ProductDAO;
+import khoita.registration.RegistrationDTO;
 
 /**
  *
  * @author Fstore
  */
-@WebServlet(name = "DispatchController", urlPatterns = {"/DispatchController"})
-public class DispatchController extends HttpServlet {
+@WebServlet(name = "ViewCartWithAccountServlet", urlPatterns = {"/ViewCartWithAccountServlet"})
+public class ViewCartWithAccountServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,46 +41,26 @@ public class DispatchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "index.html";
-        String btAction = request.getParameter("btAction");
 
         try {
-            if (btAction == null) {
-
-            } else if (btAction.equals("login")) {
-                url = "LoginServlet";
-            } else if (btAction.equals("register")) {
-                url = "RegisterServlet";
-            } else if (btAction.equals("search")) {
-                url = "SearchLastNameServlet";
-            } else if (btAction.equals("delete")) {
-                url = "DeleteAccountServlet";
-            } else if (btAction.equals("update")) {
-                url = "UpdateServlet";
-            } else if (btAction.equals("logout")) {
-                url = "LogoutServlet";
-            } else if (btAction.equals("addtocart")) {
-                url = "AddToCartServlet";
-            } else if (btAction.equals("viewcart")) {
-                url = "ViewCartWithAccountServlet";
-            } else if (btAction.equals("Add to your cart")) {
-                url = "AddToCartWithoutAccountServlet";
-            } else if (btAction.equals("View cart")) {
-                url = "ViewCartWithoutAccountServlet";
-            } else if (btAction.equals("deleteItem")) {
-                url = "DeleteItemWithoutCartServlet";
-            } else if (btAction.equals("Delete Item")) {
-                url = "DeleteItemServlet";
-            } else if (btAction.equals("Update Item")) {
-                url = "UpdateItemServlet";
+            HttpSession session = request.getSession(false);
+            ProductDAO dao = new ProductDAO();
+            RegistrationDTO username = (RegistrationDTO) session.getAttribute("USER_NAME");
+            if (username != null) {
+                dao.getProductFromCartSQL(username.getAccount());
             }
-        } catch (Exception e) {
+            List<DetailCartDTO> product = dao.getProductFromCart();
+            request.setAttribute("DETAILCART", product);
+        } catch (SQLException e) {
             System.out.println(e);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        } catch (NamingException ex) {
+            System.out.println(ex);
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher("viewcart.jsp");
+            rd.forward(request, response);
         }
-
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

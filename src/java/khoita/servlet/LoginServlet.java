@@ -14,6 +14,7 @@ import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,16 +47,22 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("txtUserName");
         String password = request.getParameter("txtPassword");
-        HttpSession session = request.getSession();
 
+        HttpSession session = request.getSession();// this is for session
         LoginDTO userLogin = new LoginDTO(username, password);
         LoginDAO userDao = new LoginDAO();
         try {
             RegistrationDTO result = userDao.checkLogin(userLogin);
             if (result != null) {
                 url = "search.jsp";
+                Cookie cookie = new Cookie("username_cookie", result.getFullname());
+                cookie.setMaxAge(60 * 60 * 24);
+                response.addCookie(cookie);
+                
+//                request.setAttribute("username_cookie", cookie);
+
             }
-            session.setAttribute("USER_NAME", result);
+            session.setAttribute("USER_NAME", result);// this is for session
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         } catch (SQLException ex) {
